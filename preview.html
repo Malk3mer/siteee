@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معاينة التصميم الجديد - Angry Store</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <style>
+        .preview-section {
+            padding: 48px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .preview-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            color: var(--primary);
+        }
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🎮 ANGRY STORE</h1>
+            </div>
+            <div class="nav-links">
+                <a href="#">🏠 الرئيسية</a>
+                <a href="#">🎮 ألعاب أوفلاين</a>
+                <a href="#">⭐ تفعيلات واشتراكات</a>
+                <a href="#">⚡ هاردوير</a>
+                <a href="#" class="dashboard-link">⚙️ لوحة التحكم</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-badge">🔥 عروض حصرية لفترة محدودة</span>
+                <h1 class="hero-title">اكتشف عالم الألعاب الرقمية</h1>
+                <p class="hero-subtitle">آلاف الألعاب والاشتراكات الحصرية بأفضل الأسعار • توصيل فوري • دعم 24/7 • ضمان الجودة</p>
+                <a href="#" class="hero-cta">تسوق الآن 🛒</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Categories Preview -->
+        <div class="preview-section">
+            <h2 class="preview-title">الأقسام</h2>
+            <div class="categories">
+                <div class="category-card">
+                    <div class="category-icon">🎮</div>
+                    <h3>ألعاب أوفلاين</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">⭐</div>
+                    <h3>تفعيلات واشتراكات</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">⚡</div>
+                    <h3>هاردوير جيمنج</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🔥</div>
+                    <h3>عروض خاصة</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons Preview -->
+        <div class="preview-section">
+            <h2 class="preview-title">الأزرار</h2>
+            <div class="demo-grid">
+                <button class="btn">زر عادي</button>
+                <button class="btn btn-primary">زر أساسي</button>
+                <button class="btn btn-outline">زر محدد</button>
+                <button class="btn btn-premium">زر مميز</button>
+            </div>
+        </div>
+
+        <!-- Badges Preview -->
+        <div class="preview-section">
+            <h2 class="preview-title">الشارات</h2>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <span class="badge badge-new">🆕 جديد</span>
+                <span class="badge badge-hot">🔥 رائج</span>
+                <span class="badge badge-sale">💰 تخفيض</span>
+                <span class="status-badge status-pending">⏳ قيد المراجعة</span>
+                <span class="status-badge status-completed">✅ مكتمل</span>
+                <span class="status-badge status-rejected">❌ مرفوض</span>
+            </div>
+        </div>
+
+        <!-- Product Cards Preview -->
+        <div class="preview-section">
+            <h2 class="preview-title">كروت المنتجات</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/400x500/1a2140/e63946?text=Game+Cover" alt="لعبة تجريبية">
+                        <span class="product-badge">لعبة</span>
+                        <span class="product-rating">⭐ 4.8</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>اسم اللعبة الرائعة</h3>
+                        <p class="product-description">وصف مختصر للعبة يوضح المميزات الرئيسية والمحتوى المتاح</p>
+                        <div class="product-footer">
+                            <span class="product-price">299 ج</span>
+                            <div class="product-actions">
+                                <a href="#" class="btn-icon">👁️</a>
+                                <button class="btn-icon">🛒</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/400x500/1a2140/f59e0b?text=Subscription" alt="اشتراك">
+                        <span class="product-badge">اشتراك</span>
+                        <span class="product-rating">⭐ 5.0</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>PlayStation Plus Premium</h3>
+                        <p class="product-description">اشتراك شهري كامل مع جميع المميزات والألعاب المجانية</p>
+                        <div class="product-footer">
+                            <span class="product-price">450 ج</span>
+                            <div class="product-actions">
+                                <a href="#" class="btn-icon">👁️</a>
+                                <button class="btn-icon">🛒</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/400x500/1a2140/22c55e?text=Hardware" alt="هاردوير">
+                        <span class="product-badge">هاردوير</span>
+                        <span class="product-rating">⭐ 4.9</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Gaming Keyboard RGB</h3>
+                        <p class="product-description">كيبورد ميكانيكي احترافي مع إضاءة RGB قابلة للتخصيص</p>
+                        <div class="product-footer">
+                            <span class="product-price">1,299 ج</span>
+                            <div class="product-actions">
+                                <a href="#" class="btn-icon">👁️</a>
+                                <button class="btn-icon">🛒</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Messages Preview -->
+        <div class="preview-section">
+            <h2 class="preview-title">الرسائل</h2>
+            <div style="display: flex; flex-direction: column; gap: 12px; max-width: 500px;">
+                <div class="alert alert-success">✅ تم إضافة المنتج بنجاح!</div>
+                <div class="alert alert-error">❌ حدث خطأ أثناء العملية</div>
+                <div class="alert alert-warning">⚠️ يرجى التحقق من البيانات</div>
+            </div>
+        </div>
+
+        <!-- Stats Cards Preview -->
+        <div class="preview-section">
+            <h2 class="preview-title">بطاقات الإحصائيات</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon">📦</div>
+                    </div>
+                    <div class="stat-body">
+                        <div class="stat-value">1,234</div>
+                        <div class="stat-label">إجمالي المنتجات</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon">👥</div>
+                    </div>
+                    <div class="stat-body">
+                        <div class="stat-value">567</div>
+                        <div class="stat-label">المستخدمين</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon">💰</div>
+                    </div>
+                    <div class="stat-body">
+                        <div class="stat-value">89,450</div>
+                        <div class="stat-label">إجمالي المبيعات</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2024 Angry Store. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="static/js/script.js"></script>
+</body>
+</html>

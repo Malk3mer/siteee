@@ -1,0 +1,328 @@
+/* ===== DARK MODE STYLES ===== */
+body.dark-mode {
+    --dark: #0f0f1e;
+    --darker: #08080f;
+    --card: #1a1a2e;
+    --text: #ffffff;
+    --text-gray: #b8b9c5;
+    --border: rgba(255, 255, 255, 0.15);
+    background: #0f0f1e;
+    color: #ffffff;
+}
+
+/* ===== LIGHT MODE STYLES ===== */
+body.light-mode {
+    --dark: #d5d8dc;
+    --darker: #c8ccd0;
+    --card: #eceff1;
+    --text: #1a1a2e;
+    --text-gray: #4a5568;
+    --border: rgba(0, 0, 0, 0.15);
+    background: #d5d8dc;
+    color: #1a1a2e;
+}
+
+/* ===== NAVBAR ===== */
+body.dark-mode .navbar {
+    background: linear-gradient(135deg, rgba(15, 15, 30, 0.98), rgba(8, 8, 15, 0.98));
+    border-bottom: 3px solid rgba(255, 71, 87, 0.4);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+body.light-mode .navbar {
+    background: linear-gradient(135deg, rgba(236, 239, 241, 0.98), rgba(213, 216, 220, 0.98));
+    border-bottom: 3px solid rgba(255, 71, 87, 0.35);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+body.light-mode .nav-brand h1 {
+    color: #1a1a2e;
+    filter: drop-shadow(0 0 12px rgba(255, 71, 87, 0.3));
+}
+
+body.light-mode .nav-center a,
+body.light-mode .nav-right a,
+body.light-mode .nav-dropdown > a {
+    color: #1a1a2e;
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.12);
+}
+
+body.light-mode .nav-center a:hover,
+body.light-mode .nav-right a:hover,
+body.light-mode .nav-dropdown > a:hover {
+    background: rgba(255, 71, 87, 0.12);
+    color: #1a1a2e;
+    border-color: rgba(255, 71, 87, 0.3);
+}
+
+body.light-mode .dropdown-menu {
+    background: linear-gradient(135deg, #eceff1 0%, #d5d8dc 100%);
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+body.light-mode .dropdown-menu a {
+    color: #1a1a2e;
+}
+
+body.light-mode .dropdown-menu a:hover {
+    background: rgba(255, 71, 87, 0.12);
+    color: #1a1a2e;
+}
+
+body.light-mode .mobile-menu-toggle {
+    background: linear-gradient(135deg, #ff4757, #ffa502);
+    color: white;
+}
+
+/* ===== CARDS & CONTAINERS ===== */
+body.dark-mode .product-card,
+body.dark-mode .category-card,
+body.dark-mode .auth-form,
+body.dark-mode .dashboard-sidebar,
+body.dark-mode .dashboard-content,
+body.dark-mode .table-container,
+body.dark-mode .order-card {
+    background: #1a1a2e;
+    color: #ffffff;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6);
+}
+
+body.light-mode .product-card,
+body.light-mode .category-card,
+body.light-mode .auth-form,
+body.light-mode .dashboard-sidebar,
+body.light-mode .dashboard-content,
+body.light-mode .table-container,
+body.light-mode .order-card {
+    background: #eceff1;
+    color: #1a1a2e;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+/* ===== IMAGES ===== */
+body.dark-mode .product-image {
+    background: linear-gradient(135deg, #0f0f1e, #1a1a2e);
+}
+
+body.light-mode .product-image {
+    background: linear-gradient(135deg, #d5d8dc, #eceff1);
+}
+
+/* ===== FOOTER ===== */
+body.dark-mode footer {
+    background: #1a1a2e;
+    border-top: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+body.light-mode footer {
+    background: #eceff1;
+    border-top: 2px solid rgba(0, 0, 0, 0.15);
+}
+
+body.light-mode footer p,
+body.light-mode footer a {
+    color: #1a1a2e;
+}
+
+/* ===== FORMS ===== */
+body.dark-mode .form-control,
+body.dark-mode .form-group input,
+body.dark-mode .form-group select,
+body.dark-mode .form-group textarea,
+body.dark-mode .customer-field,
+body.dark-mode .payment-field {
+    background: #0f0f1e;
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+body.light-mode .form-control,
+body.light-mode .form-group input,
+body.light-mode .form-group select,
+body.light-mode .form-group textarea,
+body.light-mode .customer-field,
+body.light-mode .payment-field {
+    background: #d5d8dc;
+    border-color: rgba(0, 0, 0, 0.2);
+    color: #1a1a2e;
+}
+
+body.light-mode .form-control:focus,
+body.light-mode .form-group input:focus,
+body.light-mode .form-group select:focus,
+body.light-mode .form-group textarea:focus {
+    background: #c8ccd0;
+    border-color: rgba(255, 71, 87, 0.5);
+}
+
+/* ===== SEARCH & FILTERS ===== */
+body.dark-mode .search-box input,
+body.dark-mode .filter-btn {
+    background: #0f0f1e;
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+body.light-mode .search-box input,
+body.light-mode .filter-btn {
+    background: #d5d8dc;
+    border-color: rgba(0, 0, 0, 0.2);
+    color: #1a1a2e;
+}
+
+body.light-mode .search-box input:focus {
+    background: #c8ccd0;
+    border-color: rgba(255, 71, 87, 0.5);
+}
+
+body.light-mode .search-box button {
+    background: linear-gradient(135deg, #ff4757, #ffa502);
+    color: white;
+}
+
+/* ===== ALERTS ===== */
+body.dark-mode .alert {
+    background: rgba(26, 26, 46, 0.95);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+body.light-mode .alert {
+    background: rgba(236, 239, 241, 0.98);
+    border-color: rgba(0, 0, 0, 0.15);
+    color: #1a1a2e;
+}
+
+/* ===== DASHBOARD SPECIFIC ===== */
+body.dark-mode .dashboard-sidebar {
+    border-left: 3px solid var(--primary);
+    box-shadow: 4px 0 25px rgba(0, 0, 0, 0.5);
+}
+
+body.light-mode .dashboard-sidebar {
+    border-left: 3px solid var(--primary);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.12);
+}
+
+body.light-mode .dashboard-sidebar ul li a {
+    color: #1a1a2e;
+}
+
+body.light-mode .dashboard-sidebar ul li a:hover {
+    background: rgba(255, 71, 87, 0.1);
+    color: #1a1a2e;
+}
+
+body.light-mode .dashboard-sidebar ul li a.active {
+    background: rgba(255, 71, 87, 0.15);
+    color: var(--primary);
+}
+
+body.dark-mode .customer-info-section {
+    background: rgba(255, 71, 87, 0.1);
+}
+
+body.light-mode .customer-info-section {
+    background: rgba(255, 71, 87, 0.05);
+}
+
+body.dark-mode .payment-info-section {
+    background: rgba(52, 152, 219, 0.1);
+}
+
+body.light-mode .payment-info-section {
+    background: rgba(52, 152, 219, 0.05);
+}
+
+/* ===== THEME TOGGLE BUTTON ===== */
+.theme-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 6px 25px rgba(255, 71, 87, 0.5);
+    transition: all 0.3s ease;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    transform: translateY(-5px) scale(1.1) rotate(15deg);
+    box-shadow: 0 10px 35px rgba(255, 71, 87, 0.7);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .theme-toggle {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        bottom: 20px;
+        right: 20px;
+    }
+}
+
+/* ===== ADDITIONAL LIGHT MODE STYLES ===== */
+body.light-mode .hero {
+    background: linear-gradient(135deg, rgba(236, 239, 241, 0.5), rgba(213, 216, 220, 0.5));
+}
+
+body.light-mode .hero-title,
+body.light-mode .product-info h3,
+body.light-mode .dashboard-content h2 {
+    color: #1a1a2e;
+}
+
+body.light-mode .hero-subtitle,
+body.light-mode .product-description {
+    color: #4a5568;
+}
+
+body.light-mode .btn-icon {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.15);
+    color: #1a1a2e;
+}
+
+body.light-mode .btn-icon:hover {
+    background: rgba(255, 71, 87, 0.15);
+    border-color: var(--primary);
+}
+
+body.light-mode .product-badge {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+}
+
+body.light-mode .product-price {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body.light-mode .stat-card {
+    background: linear-gradient(135deg, #d5d8dc, #c8ccd0);
+}
+
+body.light-mode .dashboard-table tbody tr:hover {
+    background: rgba(255, 71, 87, 0.08);
+}
+
+body.light-mode .testimonial-card {
+    background: #eceff1;
+    color: #1a1a2e;
+}

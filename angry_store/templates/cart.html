@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}<span data-ar="السلة - Angry Store" data-en="Cart - Angry Store">Cart - Angry Store</span>{% endblock %}
+
+{% block content %}
+<div class="container" style="margin-top: 40px;">
+    <h1 style="font-size: 36px; font-weight: 900; margin-bottom: 30px; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"><span data-ar="🛒 سلة التسوق" data-en="🛒 Shopping Cart">🛒 Shopping Cart</span></h1>
+
+    {% if cart_items %}
+    <div style="display: grid; gap: 20px;">
+        {% for item in cart_items %}
+        <div style="background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; display: flex; gap: 20px; align-items: center;">
+            <img src="{{ item.product.get_image_url }}" alt="{{ item.product.name }}" style="width: 120px; height: 120px; object-fit: cover; border-radius: 12px;">
+            <div style="flex: 1;">
+                <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 10px;">{{ item.product.name }}</h3>
+                <p style="color: var(--text-gray); margin-bottom: 10px;">{{ item.product.description|truncatewords:20 }}</p>
+                <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+                    <span class="currency" style="font-size: 24px; font-weight: 900; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ item.product.price }} <span data-ar="ج" data-en="EGP">EGP</span></span>
+                    
+                    <!-- Quantity Controls -->
+                    <div style="display: flex; align-items: center; gap: 10px; background: var(--dark); padding: 8px 12px; border-radius: 10px;">
+                        <form method="post" action="{% url 'update_cart_quantity' item.pk %}" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="decrease">
+                            <button type="submit" style="background: rgba(255, 71, 87, 0.2); border: none; color: var(--primary); width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-weight: 900; font-size: 18px; transition: all 0.3s;" onmouseover="this.style.background='rgba(255, 71, 87, 0.3)'" onmouseout="this.style.background='rgba(255, 71, 87, 0.2)'">−</button>
+                        </form>
+                        <span style="font-size: 18px; font-weight: 800; min-width: 30px; text-align: center; color: var(--text);">{{ item.quantity }}</span>
+                        <form method="post" action="{% url 'update_cart_quantity' item.pk %}" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="increase">
+                            <button type="submit" style="background: rgba(46, 204, 113, 0.2); border: none; color: #2ecc71; width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-weight: 900; font-size: 18px; transition: all 0.3s;" onmouseover="this.style.background='rgba(46, 204, 113, 0.3)'" onmouseout="this.style.background='rgba(46, 204, 113, 0.2)'">+</button>
+                        </form>
+                    </div>
+                    
+                    <span style="color: var(--text-gray); font-size: 14px;"><span data-ar="الإجمالي:" data-en="Total:">Total:</span> <strong style="color: var(--primary);">{{ item.get_total_price }} <span data-ar="ج" data-en="EGP">EGP</span></strong></span>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <a href="{% url 'create_order' item.product.pk %}" class="btn btn-primary" style="padding: 12px 24px; font-size: 14px; white-space: nowrap;"><span data-ar="اشتري الآن" data-en="Buy Now">Buy Now</span></a>
+                <a href="{% url 'remove_from_cart' item.pk %}" class="btn btn-outline" style="padding: 12px 24px; font-size: 14px; color: #ef4444; border-color: #ef4444; white-space: nowrap;" onclick="return confirm('هل أنت متأكد من حذف هذا المنتج؟')"><span data-ar="حذف" data-en="Remove">Remove</span></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div style="margin-top: 30px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 25px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <span style="font-size: 20px; font-weight: 700;"><span data-ar="الإجمالي الكلي:" data-en="Grand Total:">Grand Total:</span></span>
+            <span class="currency" style="font-size: 32px; font-weight: 900; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ total }} <span data-ar="ج" data-en="EGP">EGP</span></span>
+        </div>
+        <div style="background: rgba(255, 165, 2, 0.1); border: 1px solid rgba(255, 165, 2, 0.3); border-radius: 10px; padding: 15px; margin-bottom: 20px;">
+            <p style="margin: 0; color: var(--text-gray); font-size: 14px; line-height: 1.6;">
+                <span data-ar="💡 يمكنك شراء جميع المنتجات دفعة واحدة أو شراء كل منتج على حدة" data-en="💡 You can buy all products at once or buy each product separately">💡 You can buy all products at once or buy each product separately</span>
+            </p>
+        </div>
+        <a href="{% url 'create_order' cart_items.first.product.pk %}" class="btn btn-primary" style="width: 100%; font-size: 18px; padding: 18px; text-align: center; display: block; text-decoration: none;"><span data-ar="📦 شراء جميع المنتجات ({{ cart_count }} منتج)" data-en="📦 Buy All Products ({{ cart_count }} items)">📦 Buy All Products ({{ cart_count }} items)</span></a>
+    </div>
+
+    <!-- Bulk Order Modal -->
+    <div id="bulk-order-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; align-items: center; justify-content: center;">
+        <div style="background: var(--card); border-radius: 20px; padding: 40px; max-width: 600px; width: 90%; max-height: 90vh; overflow-y: auto;">
+            <h3 style="font-size: 24px; font-weight: 900; margin-bottom: 25px;"><span data-ar="💳 إتمام الدفع" data-en="💳 Complete Payment">💳 Complete Payment</span></h3>
+            
+            <!-- Payment Numbers -->
+            <div style="background: rgba(255, 165, 2, 0.1); border: 1px solid rgba(255, 165, 2, 0.3); border-radius: 12px; padding: 20px; margin-bottom: 25px;">
+                <h4 style="font-size: 16px; font-weight: 800; margin-bottom: 15px; color: var(--primary);"><span data-ar="📱 أرقام الدفع" data-en="📱 Payment Numbers">📱 Payment Numbers</span></h4>
+                <div style="display: grid; gap: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: var(--dark); border-radius: 8px;">
+                        <span style="font-weight: 700;">Vodafone Cash:</span>
+                        <span style="color: var(--primary); font-weight: 800;">01007875534</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: var(--dark); border-radius: 8px;">
+                        <span style="font-weight: 700;">InstaPay:</span>
+                        <span style="color: var(--primary); font-weight: 800;">01222755348</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: var(--dark); border-radius: 8px;">
+                        <span style="font-weight: 700;">Binance Pay:</span>
+                        <span style="color: var(--primary); font-weight: 800;">angrystore@binance.com</span>
+                    </div>
+                </div>
+            </div>
+            
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div style="margin-bottom: 20px;">
+                    <label style="font-weight: 700; margin-bottom: 8px; display: block;"><span data-ar="💵 طريقة الدفع" data-en="💵 Payment Method">💵 Payment Method</span></label>
+                    <select name="payment_method" required style="width: 100%; padding: 14px; background: var(--dark); border: 1px solid var(--border); color: var(--text); border-radius: 10px;">
+                        <option value="vodafone">📱 Vodafone Cash</option>
+                        <option value="instapay">💳 InstaPay</option>
+                        <option value="binance">💰 Binance Pay</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="font-weight: 700; margin-bottom: 8px; display: block;"><span data-ar="👤 Discord" data-en="👤 Discord">👤 Discord</span></label>
+                    <input type="text" name="discord_username" required style="width: 100%; padding: 14px; background: var(--dark); border: 1px solid var(--border); color: var(--text); border-radius: 10px;">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="font-weight: 700; margin-bottom: 8px; display: block;"><span data-ar="📱 WhatsApp" data-en="📱 WhatsApp">📱 WhatsApp</span></label>
+                    <input type="text" name="whatsapp" required style="width: 100%; padding: 14px; background: var(--dark); border: 1px solid var(--border); color: var(--text); border-radius: 10px;">
+                </div>
+                <div style="margin-bottom: 25px;">
+                    <label style="font-weight: 700; margin-bottom: 8px; display: block;"><span data-ar="📸 إثبات الدفع" data-en="📸 Payment Proof">📸 Payment Proof</span></label>
+                    <input type="file" name="payment_proof" required style="width: 100%; padding: 14px; background: var(--dark); border: 1px solid var(--border); color: var(--text); border-radius: 10px;">
+                </div>
+                <div style="display: flex; gap: 15px;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;"><span data-ar="✅ إرسال الطلب" data-en="✅ Submit Order">✅ Submit Order</span></button>
+                    <button type="button" onclick="closeBulkOrderModal()" class="btn btn-outline" style="flex: 1;"><span data-ar="❌ إلغاء" data-en="❌ Cancel">❌ Cancel</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="empty-state-icon">🛒</div>
+        <h3 class="empty-state-title"><span data-ar="السلة فارغة" data-en="Cart is Empty">Cart is Empty</span></h3>
+        <p class="empty-state-text"><span data-ar="لم تقم بإضافة أي منتجات للسلة بعد" data-en="You haven't added any products to cart yet">You haven't added any products to cart yet</span></p>
+        <a href="{% url 'home' %}" class="btn btn-primary"><span data-ar="تصفح المنتجات" data-en="Browse Products">Browse Products</span></a>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+.empty-state {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.empty-state-icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+    opacity: 0.3;
+}
+
+.empty-state-title {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: var(--text);
+}
+
+.empty-state-text {
+    font-size: 16px;
+    color: var(--text-gray);
+    margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+    .container > div > div {
+        flex-direction: column;
+    }
+    
+    .container > div > div > div:last-child {
+        width: 100%;
+    }
+}
+</style>
+
+<script>
+function showBulkOrderModal() {
+    document.getElementById('bulk-order-modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeBulkOrderModal() {
+    document.getElementById('bulk-order-modal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal when clicking outside
+document.getElementById('bulk-order-modal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeBulkOrderModal();
+    }
+});
+
+// Close modal with ESC key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeBulkOrderModal();
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block dashboard_content %}
+<div class="orders-header">
+    <h1 class="orders-title">🛒 إدارة الطلبات</h1>
+    <div class="stats-badges">
+        <div class="stat-badge pending">⏳ جاري الاستلام: {{ pending_count|default:0 }}</div>
+        <div class="stat-badge received">📥 تم الاستلام: {{ received_count|default:0 }}</div>
+        <div class="stat-badge processing">⚙️ قيد التنفيذ: {{ processing_count|default:0 }}</div>
+        <div class="stat-badge completed">✅ مكتمل: {{ completed_count|default:0 }}</div>
+        <div class="stat-badge rejected">❌ مرفوض: {{ rejected_count|default:0 }}</div>
+    </div>
+</div>
+
+{% for order in orders %}
+<div class="order-card">
+    <div class="order-top">
+        <div class="order-product-info">
+            <div class="order-id">🆔 طلب #{{ order.id }}</div>
+            <h3>🎮 {{ order.product.name }}</h3>
+            <div class="order-date">📅 {{ order.created_at|date:"Y-m-d H:i" }}</div>
+        </div>
+        <div class="order-status-badge {{ order.status }}">
+            {% if order.status == 'pending' %}⏳ جاري الاستلام
+            {% elif order.status == 'received' %}📥 تم الاستلام
+            {% elif order.status == 'processing' %}⚙️ قيد التنفيذ
+            {% elif order.status == 'completed' %}✅ مكتمل
+            {% elif order.status == 'rejected' %}❌ مرفوض
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="customer-info-section">
+        <h4 class="customer-info-title">👤 بيانات العميل</h4>
+        <div class="customer-details">
+            <div class="customer-field">
+                <span class="customer-field-label">👤 اسم المستخدم</span>
+                <span class="customer-field-value">{{ order.user.username }}</span>
+            </div>
+            <div class="customer-field">
+                <span class="customer-field-label">💬 Discord</span>
+                <span class="customer-field-value">{{ order.discord_username|default:"غير متوفر" }}</span>
+            </div>
+            <div class="customer-field">
+                <span class="customer-field-label">📱 WhatsApp</span>
+                <span class="customer-field-value">{{ order.whatsapp|default:"غير متوفر" }}</span>
+            </div>
+            <div class="customer-field">
+                <span class="customer-field-label">📧 البريد الإلكتروني</span>
+                <span class="customer-field-value">{{ order.user.email|default:"غير متوفر" }}</span>
+            </div>
+        </div>
+        <div class="quick-contact">
+            {% if order.discord_username %}
+            <a href="https://discord.com/users/{{ order.discord_username }}" target="_blank" class="contact-btn discord">💬 Discord</a>
+            {% endif %}
+            {% if order.whatsapp %}
+            <a href="https://wa.me/{{ order.whatsapp }}" target="_blank" class="contact-btn whatsapp">📱 WhatsApp</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="payment-info-section">
+        <h4 class="payment-info-title">💳 بيانات الدفع</h4>
+        <div class="payment-details">
+            <div class="payment-field">
+                <span class="payment-field-label">💳 طريقة الدفع</span>
+                <span class="payment-field-value">{{ order.get_payment_method_display }}</span>
+            </div>
+            <div class="payment-field">
+                <span class="payment-field-label">💰 السعر</span>
+                <span class="payment-field-value">{{ order.product.price }} جنيه</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="order-actions-section">
+        <form method="post" action="{% url 'dashboard_update_order_status' order.pk %}" class="status-buttons">
+            {% csrf_token %}
+            <button type="submit" name="status" value="received" class="status-btn received {% if order.status == 'received' %}active{% endif %}">📥 تم الاستلام</button>
+            <button type="submit" name="status" value="processing" class="status-btn processing {% if order.status == 'processing' %}active{% endif %}">⚙️ قيد التنفيذ</button>
+            <button type="submit" name="status" value="completed" class="status-btn completed {% if order.status == 'completed' %}active{% endif %}">✅ مكتمل</button>
+            <button type="submit" name="status" value="rejected" class="status-btn rejected {% if order.status == 'rejected' %}active{% endif %}">❌ رفض</button>
+        </form>
+        <a href="{{ order.payment_proof.url }}" target="_blank" class="proof-link">📄 عرض إثبات الدفع</a>
+    </div>
+</div>
+{% empty %}
+<div class="empty-orders">
+    <div class="empty-icon">📭</div>
+    <div class="empty-text">لا توجد طلبات حالياً</div>
+</div>
+{% endfor %}
+{% endblock %}

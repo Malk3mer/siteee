@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="dashboard-sidebar">
+        <h3>📊 لوحة التحكم</h3>
+        <ul>
+            <li><a href="{% url 'dashboard' %}">📈 الإحصائيات</a></li>
+            <li><a href="{% url 'dashboard_products' %}">📦 المنتجات</a></li>
+            <li><a href="{% url 'dashboard_users' %}">👥 المستخدمين</a></li>
+            <li><a href="{% url 'dashboard_orders' %}">🛒 الطلبات</a></li>
+            <li><a href="{% url 'dashboard_testimonials' %}" class="active">👍 آراء العملاء</a></li>
+        </ul>
+    </div>
+    <div class="dashboard-content">
+        <h2>➕ إضافة رأي عميل جديد</h2>
+        
+        <form method="post" style="max-width: 600px;">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label>اسم العميل</label>
+                <input type="text" name="username" class="form-control" required placeholder="مثال: أحمد محمد">
+            </div>
+
+            <div class="form-group">
+                <label>نص الرأي</label>
+                <textarea name="text" class="form-control" rows="4" required placeholder="اكتب رأي العميل هنا..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>الوقت (اختياري)</label>
+                <input type="text" name="time_ago" class="form-control" placeholder="منذ يومين" value="منذ يومين">
+                <small style="color: var(--text-gray); font-size: 12px;">مثال: منذ يومين، منذ 3 أيام، منذ أسبوع</small>
+            </div>
+
+            <div class="form-group">
+                <label>لون الأفاتار (اختياري)</label>
+                <select name="avatar_color" class="form-control">
+                    <option value="linear-gradient(135deg, #5865F2, #7289DA)">أزرق (Discord)</option>
+                    <option value="linear-gradient(135deg, #ff4757, #ffa502)">أحمر وبرتقالي</option>
+                    <option value="linear-gradient(135deg, #5f27cd, #341f97)">بنفسجي</option>
+                    <option value="linear-gradient(135deg, #2ecc71, #27ae60)">أخضر</option>
+                    <option value="linear-gradient(135deg, #3498db, #2980b9)">أزرق فاتح</option>
+                    <option value="linear-gradient(135deg, #e74c3c, #c0392b)">أحمر غامق</option>
+                    <option value="linear-gradient(135deg, #f39c12, #e67e22)">برتقالي</option>
+                </select>
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-top: 30px;">
+                <button type="submit" class="btn btn-primary">✅ إضافة الرأي</button>
+                <a href="{% url 'dashboard_testimonials' %}" class="btn btn-outline">إلغاء</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

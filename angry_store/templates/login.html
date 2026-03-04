@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="auth-form">
+        <h2><span data-ar="تسجيل الدخول" data-en="Login">Login</span></h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label><span data-ar="اسم المستخدم" data-en="Username">Username</span></label>
+                <input type="text" name="username" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label><span data-ar="كلمة المرور" data-en="Password">Password</span></label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary"><span data-ar="دخول" data-en="Login">Login</span></button>
+        </form>
+        <p class="auth-link"><span data-ar="ليس لديك حساب؟" data-en="Don't have an account?">Don't have an account?</span> <a href="{% url 'register' %}"><span data-ar="إنشاء حساب" data-en="Create Account">Create Account</span></a></p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,327 @@
+/* ============================================
+   DASHBOARD - MODERN & PROFESSIONAL DESIGN
+   ============================================ */
+
+/* ===== LAYOUT ===== */
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+    background: var(--darker);
+}
+
+/* ===== SIDEBAR ===== */
+.dashboard-sidebar {
+    width: 280px;
+    background: var(--card);
+    border-left: 3px solid var(--primary);
+    padding: 30px 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-sidebar h3 {
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 30px;
+    padding: 15px;
+    color: white;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 12px;
+    text-align: center;
+}
+
+.dashboard-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dashboard-sidebar li {
+    margin-bottom: 10px;
+}
+
+.dashboard-sidebar a {
+    display: flex;
+    align-items: center;
+    padding: 16px 18px;
+    border-radius: 12px;
+    color: var(--text-gray);
+    transition: all 0.3s ease;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    border: 2px solid transparent;
+}
+
+.dashboard-sidebar a:hover {
+    background: rgba(255, 71, 87, 0.1);
+    color: var(--primary);
+    transform: translateX(-5px);
+    border-color: var(--primary);
+}
+
+.dashboard-sidebar a.active {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+}
+
+/* ===== MAIN CONTENT ===== */
+.dashboard-content {
+    flex: 1;
+    padding: 40px;
+    background: var(--darker);
+    overflow-y: auto;
+}
+
+/* ===== HEADER ===== */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+    padding-bottom: 25px;
+    border-bottom: 3px solid var(--border);
+}
+
+.dashboard-header h2 {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--text);
+    margin: 0;
+}
+
+/* ===== BUTTONS ===== */
+.btn-primary, .btn-add {
+    padding: 14px 28px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+}
+
+.btn-primary:hover, .btn-add:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(255, 71, 87, 0.5);
+}
+
+.btn-small {
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+}
+
+.btn-edit {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+}
+
+.btn-edit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+}
+
+.btn-delete {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+}
+
+.btn-delete:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+}
+
+/* ===== TABLE ===== */
+.table-container {
+    background: var(--card);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 3px solid var(--border);
+}
+
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.dashboard-table thead {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+.dashboard-table th {
+    padding: 20px;
+    text-align: right;
+    font-weight: 900;
+    font-size: 15px;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dashboard-table td {
+    padding: 20px;
+    text-align: right;
+    border-bottom: 2px solid var(--border);
+    color: var(--text);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.dashboard-table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.dashboard-table tbody tr:hover {
+    background: rgba(255, 71, 87, 0.05);
+    transform: scale(1.01);
+}
+
+.table-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 3px solid var(--border);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== STATUS BADGES ===== */
+.status-badge {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 800;
+    display: inline-block;
+}
+
+.status-badge.status-completed {
+    background: #2ecc71;
+    color: white;
+}
+
+.status-badge.status-pending {
+    background: #ffa502;
+    color: white;
+}
+
+/* ===== FORMS ===== */
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 14px 18px;
+    background: var(--dark);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(255, 71, 87, 0.1);
+}
+
+textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+select.form-control {
+    cursor: pointer;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+    .dashboard {
+        flex-direction: column;
+    }
+    
+    .dashboard-sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-left: none;
+        border-bottom: 3px solid var(--primary);
+    }
+    
+    .dashboard-content {
+        padding: 25px;
+    }
+    
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .table-container {
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-sidebar h3 {
+        font-size: 18px;
+        padding: 12px;
+    }
+    
+    .dashboard-sidebar a {
+        font-size: 14px;
+        padding: 14px 16px;
+    }
+    
+    .dashboard-content {
+        padding: 20px;
+    }
+    
+    .dashboard-header h2 {
+        font-size: 24px;
+    }
+    
+    .btn-primary, .btn-add {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .dashboard-table th,
+    .dashboard-table td {
+        padding: 12px;
+        font-size: 13px;
+    }
+    
+    .table-img {
+        width: 50px;
+        height: 50px;
+    }
+}

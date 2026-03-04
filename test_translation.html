@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار نظام الترجمة - Translation Test</title>
+    <link rel="stylesheet" href="angry_store/static/css/style.css">
+    <link rel="stylesheet" href="angry_store/static/css/translation.css">
+    <script src="angry_store/static/js/translate.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 40px;
+            min-height: 100vh;
+        }
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .test-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .test-header h1 {
+            font-size: 48px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff4757, #5f27cd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+        .lang-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #5f27cd, #341f97);
+            padding: 15px 30px;
+            border-radius: 12px;
+            border: none;
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .lang-toggle-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(95, 39, 205, 0.4);
+        }
+        .test-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .test-section h2 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #ff4757;
+        }
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .test-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .test-item h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #5f27cd;
+        }
+        .test-item p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+        .price-test {
+            font-size: 32px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff4757, #ff6348);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            margin: 5px;
+        }
+        .badge-success {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+        .badge-warning {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+        .badge-info {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-header">
+            <h1>🌍 اختبار نظام الترجمة الكامل</h1>
+            <p style="font-size: 18px; color: rgba(255, 255, 255, 0.7); margin-bottom: 30px;">
+                اضغط على الزر لتبديل اللغة ومشاهدة الترجمة الفورية لجميع العناصر
+            </p>
+            <button onclick="toggleLanguage()" class="lang-toggle-btn">
+                <span id="langIcon">🇬🇧</span>
+                <span id="langText">EN</span>
+                <span>تبديل اللغة</span>
+            </button>
+        </div>
+
+        <!-- Navigation Test -->
+        <div class="test-section">
+            <h2>📱 القوائم والتنقل</h2>
+            <div class="test-grid">
+                <div class="test-item">
+                    <h3>الرئيسية</h3>
+                    <p>الصفحة الرئيسية للموقع</p>
+                </div>
+                <div class="test-item">
+                    <h3>الألعاب</h3>
+                    <p>جميع الألعاب المتاحة</p>
+                </div>
+                <div class="test-item">
+                    <h3>ألعاب أوفلاين</h3>
+                    <p>ألعاب بدون إنترنت</p>
+                </div>
+                <div class="test-item">
+                    <h3>ألعاب أونلاين</h3>
+                    <p>ألعاب تحتاج إنترنت</p>
+                </div>
+                <div class="test-item">
+                    <h3>مفاتيح التفعيل</h3>
+                    <p>مفاتيح تفعيل الألعاب</p>
+                </div>
+                <div class="test-item">
+                    <h3>الاشتراكات</h3>
+                    <p>اشتراكات متنوعة</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Account Test -->
+        <div class="test-section">
+            <h2>👤 حساب المستخدم</h2>
+            <div class="test-grid">
+                <div class="test-item">
+                    <h3>ملفي الشخصي</h3>
+                    <p>معلومات الحساب الشخصي</p>
+                </div>
+                <div class="test-item">
+                    <h3>طلباتي</h3>
+                    <p>جميع الطلبات السابقة</p>
+                </div>
+                <div class="test-item">
+                    <h3>لوحة التحكم</h3>
+                    <p>لوحة تحكم المدير</p>
+                </div>
+                <div class="test-item">
+                    <h3>تسجيل الدخول</h3>
+                    <p>الدخول للحساب</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cart & Wishlist Test -->
+        <div class="test-section">
+            <h2>🛒 السلة والمفضلة</h2>
+            <div class="test-grid">
+                <div class="test-item">
+                    <h3>سلة التسوق</h3>
+                    <p>المنتجات في السلة</p>
+                    <div style="margin-top: 15px;">
+                        <span class="status-badge badge-success">إضافة للسلة</span>
+                        <span class="status-badge badge-warning">حذف</span>
+                    </div>
+                </div>
+                <div class="test-item">
+                    <h3>المفضلة</h3>
+                    <p>المنتجات المفضلة</p>
+                    <div style="margin-top: 15px;">
+                        <span class="status-badge badge-info">إضافة للمفضلة</span>
+                        <span class="status-badge badge-warning">نقل للسلة</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Test -->
+        <div class="test-section">
+            <h2>🎮 المنتجات</h2>
+            <div class="test-grid">
+                <div class="test-item">
+                    <h3>المنتجات</h3>
+                    <p>جميع المنتجات المتاحة</p>
+                    <div style="margin-top: 15px;">
+                        <span class="status-badge badge-success">عرض التفاصيل</span>
+                        <span class="status-badge badge-info">اشتري الآن</span>
+                    </div>
+                </div>
+                <div class="test-item">
+                    <h3>المميزات</h3>
+                    <p>توصيل فوري • ضمان • دفع آمن</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Price Test -->
+        <div class="test-section">
+            <h2>💰 اختبار العملة</h2>
+            <div class="test-grid">
+                <div class="test-item">
+                    <h3>السعر</h3>
+                    <p class="price-test currency">299 ج</p>
+                </div>
+                <div class="test-item">
+                    <h3>الإجمالي</h3>
+                    <p class="price-test currency">1500 جنيه</p>
+                </div>
+                <div class="test-item">
+                    <h3>متوسط الطلب</h3>
+                    <p class="price-test currency">450 ج.م</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Test -->
+        <div class="test-section">
+            <h2>💳 الدفع والطلبات</h2>
+            <div class="test-grid">
+                <div class="test-item">
+                    <h3>إتمام الدفع</h3>
+                    <p>طريقة الدفع: فودافون كاش</p>
+                    <div style="margin-top: 15px;">
+                        <span class="status-badge badge-success">إرسال الطلب</span>
+                        <span class="status-badge badge-warning">إلغاء</span>
+                    </div>
+                </div>
+                <div class="test-item">
+                    <h3>الحالة</h3>
+                    <p>قيد المراجعة</p>
+                    <div style="margin-top: 15px;">
+                        <span class="status-badge badge-info">مكتمل</span>
+                        <span class="status-badge badge-warning">ملغي</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Test -->
+        <div class="test-section">
+            <h2>📊 لوحة التحكم</h2>
+            <div class="test-grid">
+                <div class="test-item">
+                    <h3>الإحصائيات</h3>
+                    <p>إجمالي المستخدمين: 1,234</p>
+                    <p>إجمالي المنتجات: 567</p>
+                    <p>إجمالي الطلبات: 890</p>
+                </div>
+                <div class="test-item">
+                    <h3>إجراءات سريعة</h3>
+                    <div style="margin-top: 15px;">
+                        <span class="status-badge badge-success">إضافة منتج جديد</span>
+                        <span class="status-badge badge-info">مراجعة الطلبات</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Common Test -->
+        <div class="test-section">
+            <h2>🔍 عام</h2>
+            <div class="test-grid">
+                <div class="test-item">
+                    <h3>بحث</h3>
+                    <input type="text" placeholder="ابحث عن لعبتك المفضلة" style="width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: white; border-radius: 8px;">
+                </div>
+                <div class="test-item">
+                    <h3>الأزرار</h3>
+                    <div style="margin-top: 15px;">
+                        <span class="status-badge badge-success">حفظ التغييرات</span>
+                        <span class="status-badge badge-info">تحديث</span>
+                        <span class="status-badge badge-warning">رجوع</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Test -->
+        <div class="test-section">
+            <h2>✨ لماذا تختارنا</h2>
+            <div class="test-grid">
+                <div class="test-item">
+                    <h3>⚡ توصيل فوري</h3>
+                    <p>احصل على منتجك فوراً بعد الدفع مباشرة</p>
+                </div>
+                <div class="test-item">
+                    <h3>💬 دعم 24/7</h3>
+                    <p>فريق دعم متواجد طوال الوقت</p>
+                </div>
+                <div class="test-item">
+                    <h3>💰 أسعار تنافسية</h3>
+                    <p>أفضل الأسعار في السوق</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align: center; margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+            <p style="font-size: 18px; font-weight: 700; margin-bottom: 15px;">
+                ديسكورد • جميع الروابط • تواصل معنا
+            </p>
+            <p style="color: rgba(255, 255, 255, 0.5);">
+                جميع الحقوق محفوظة © 2026 Angry Store
+            </p>
+        </div>
+    </div>
+
+    <script src="angry_store/static/js/auto-translate.js"></script>
+</body>
+</html>

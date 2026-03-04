@@ -1,0 +1,48 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block dashboard_content %}
+<div class="dashboard-header">
+    <h2>⭐ إدارة آراء العملاء</h2>
+    <a href="{% url 'dashboard_add_testimonial' %}" class="btn-primary">➕ إضافة رأي جديد</a>
+</div>
+
+<div class="table-container">
+    <table class="dashboard-table">
+        <thead>
+            <tr>
+                <th>👤 اسم العميل</th>
+                <th>💬 الرأي</th>
+                <th>⏰ الوقت</th>
+                <th>🟢 الحالة</th>
+                <th>⚙️ الإجراءات</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for testimonial in testimonials %}
+            <tr>
+                <td><strong>{{ testimonial.username }}</strong></td>
+                <td>{{ testimonial.text|truncatewords:15 }}</td>
+                <td>{{ testimonial.time_ago }}</td>
+                <td>
+                    {% if testimonial.is_active %}
+                        <span class="status-badge status-completed">✅ نشط</span>
+                    {% else %}
+                        <span class="status-badge status-pending">❌ غير نشط</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'dashboard_delete_testimonial' testimonial.pk %}" class="btn-small btn-delete" onclick="return confirm('هل أنت متأكد من حذف هذا الرأي؟')">🗑️ حذف</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" style="text-align: center; padding: 50px 20px;">
+                    <div style="font-size: 50px; margin-bottom: 12px; opacity: 0.4;">⭐</div>
+                    <div style="font-size: 16px; font-weight: 700; color: var(--text-gray);">لا توجد آراء حالياً</div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

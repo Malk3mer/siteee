@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard-new.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <!-- SIDEBAR -->
+    <div class="dashboard-sidebar">
+        <h3>📊 لوحة التحكم</h3>
+        <ul>
+            <li><a href="{% url 'dashboard' %}" {% if request.resolver_match.url_name == 'dashboard' %}class="active"{% endif %}>📈 الإحصائيات</a></li>
+            <li><a href="{% url 'dashboard_products' %}" {% if 'products' in request.path %}class="active"{% endif %}>📦 المنتجات</a></li>
+            <li><a href="{% url 'dashboard_users' %}" {% if 'users' in request.path %}class="active"{% endif %}>👥 المستخدمين</a></li>
+            <li><a href="{% url 'dashboard_orders' %}" {% if 'orders' in request.path %}class="active"{% endif %}>🛒 الطلبات</a></li>
+            <li><a href="{% url 'dashboard_testimonials' %}" {% if 'testimonials' in request.path %}class="active"{% endif %}>⭐ آراء العملاء</a></li>
+        </ul>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="dashboard-content">
+        {% block dashboard_content %}{% endblock %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,272 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block dashboard_content %}
+<style>
+.welcome-banner {
+    background: linear-gradient(135deg, #ff4757, #ffa502);
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 30px;
+    color: white;
+}
+
+.welcome-banner h1 {
+    font-size: 28px;
+    font-weight: 900;
+    margin: 0 0 8px 0;
+}
+
+.welcome-banner p {
+    font-size: 14px;
+    margin: 0;
+    opacity: 0.9;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    transition: all 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary);
+    box-shadow: 0 8px 24px rgba(255, 71, 87, 0.2);
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, rgba(255, 71, 87, 0.2), rgba(255, 165, 2, 0.2));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 6px;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: var(--text-gray);
+    font-weight: 600;
+}
+
+.stat-footer {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-gray);
+}
+
+.quick-actions {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 30px;
+}
+
+.quick-actions h3 {
+    font-size: 18px;
+    font-weight: 800;
+    margin: 0 0 20px 0;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+}
+
+.action-btn {
+    background: var(--dark);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.action-btn:hover {
+    border-color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 71, 87, 0.2);
+}
+
+.action-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, rgba(255, 71, 87, 0.2), rgba(255, 165, 2, 0.2));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.action-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.revenue-card {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+}
+
+.revenue-card h3 {
+    font-size: 18px;
+    font-weight: 800;
+    margin: 0 0 20px 0;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.revenue-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px;
+    background: var(--dark);
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.revenue-label {
+    font-size: 13px;
+    color: var(--text-gray);
+    font-weight: 600;
+}
+
+.revenue-value {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.revenue-highlight {
+    background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(39, 174, 96, 0.1));
+    border: 1px solid rgba(46, 204, 113, 0.3);
+    padding: 18px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+.revenue-highlight .revenue-value {
+    font-size: 24px;
+    color: #2ecc71;
+}
+</style>
+
+<div class="welcome-banner">
+    <h1>👋 مرحباً بك في لوحة التحكم</h1>
+    <p>إدارة شاملة لمتجرك الإلكتروني • تحكم كامل في المنتجات والطلبات والمستخدمين</p>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div class="stat-value">{{ total_users }}</div>
+        <div class="stat-label">إجمالي المستخدمين</div>
+        <div class="stat-footer">📊 جميع المستخدمين المسجلين</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon">📦</div>
+        <div class="stat-value">{{ total_products }}</div>
+        <div class="stat-label">إجمالي المنتجات</div>
+        <div class="stat-footer">🎮 {{ games_count }} ألعاب • {{ subscriptions_count }} اشتراكات</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon">🛒</div>
+        <div class="stat-value">{{ total_orders }}</div>
+        <div class="stat-label">إجمالي الطلبات</div>
+        <div class="stat-footer">✅ {{ completed_orders }} مكتمل • {{ rejected_orders }} مرفوض</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon">⏳</div>
+        <div class="stat-value">{{ pending_orders }}</div>
+        <div class="stat-label">طلبات قيد المراجعة</div>
+        <div class="stat-footer">🔔 يحتاج إلى مراجعة فورية</div>
+    </div>
+</div>
+
+<div class="quick-actions">
+    <h3>⚡ إجراءات سريعة</h3>
+    <div class="actions-grid">
+        <a href="{% url 'dashboard_add_product' %}" class="action-btn">
+            <div class="action-icon">➕</div>
+            <div class="action-label">إضافة منتج جديد</div>
+        </a>
+        <a href="{% url 'dashboard_orders' %}" class="action-btn">
+            <div class="action-icon">📋</div>
+            <div class="action-label">مراجعة الطلبات</div>
+        </a>
+        <a href="{% url 'dashboard_products' %}" class="action-btn">
+            <div class="action-icon">📦</div>
+            <div class="action-label">إدارة المنتجات</div>
+        </a>
+        <a href="{% url 'dashboard_users' %}" class="action-btn">
+            <div class="action-icon">👥</div>
+            <div class="action-label">إدارة المستخدمين</div>
+        </a>
+    </div>
+</div>
+
+<div class="revenue-card">
+    <h3>💰 المكاسب والإيرادات</h3>
+    <div class="revenue-highlight">
+        <div class="revenue-item" style="background: transparent; padding: 0;">
+            <div class="revenue-label">💵 إجمالي المكسب</div>
+            <div class="revenue-value">{{ total_revenue|floatformat:0 }} ج</div>
+        </div>
+    </div>
+    <div class="revenue-item">
+        <div class="revenue-label">📊 متوسط الطلب</div>
+        <div class="revenue-value">{{ average_order|floatformat:0 }} ج</div>
+    </div>
+    <div class="revenue-item">
+        <div class="revenue-label">✅ طلبات مكتملة</div>
+        <div class="revenue-value">{{ completed_orders }}</div>
+    </div>
+    <div class="revenue-item">
+        <div class="revenue-label">🔥 معدل النجاح</div>
+        <div class="revenue-value">{{ success_rate|floatformat:1 }}%</div>
+    </div>
+</div>
+{% endblock %}

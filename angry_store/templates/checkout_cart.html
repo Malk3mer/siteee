@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}<span data-ar="إتمام الطلب - Angry Store" data-en="Checkout - Angry Store">Checkout - Angry Store</span>{% endblock %}
+
+{% block content %}
+<div class="container" style="margin-top: 40px; max-width: 900px;">
+    <h1 style="font-size: 36px; font-weight: 900; margin-bottom: 30px; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center;">
+        <span data-ar="💳 إتمام الطلب" data-en="💳 Complete Order">💳 Complete Order</span>
+    </h1>
+
+    <!-- Cart Summary -->
+    <div style="background: var(--card); border: 2px solid var(--border); border-radius: 16px; padding: 25px; margin-bottom: 30px;">
+        <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 20px; color: var(--primary);">
+            <span data-ar="📦 ملخص الطلب" data-en="📦 Order Summary">📦 Order Summary</span>
+        </h2>
+        
+        {% for item in cart_items %}
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: var(--dark); border-radius: 10px; margin-bottom: 12px;">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <img src="{{ item.product.get_image_url }}" alt="{{ item.product.name }}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                <div>
+                    <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 5px;">{{ item.product.name }}</h3>
+                    <p style="font-size: 13px; color: var(--text-gray);">
+                        <span data-ar="الكمية:" data-en="Quantity:">Quantity:</span> {{ item.quantity }}
+                    </p>
+                </div>
+            </div>
+            <div style="text-align: left;">
+                <div style="font-size: 18px; font-weight: 900; color: var(--primary);">{{ item.get_total_price }} <span data-ar="ج" data-en="EGP">EGP</span></div>
+            </div>
+        </div>
+        {% endfor %}
+        
+        <div style="border-top: 2px solid var(--border); margin-top: 20px; padding-top: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 20px; font-weight: 700;"><span data-ar="الإجمالي:" data-en="Total:">Total:</span></span>
+            <span style="font-size: 32px; font-weight: 900; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ total }} <span data-ar="ج" data-en="EGP">EGP</span></span>
+        </div>
+    </div>
+
+    <!-- Payment Information -->
+    <div style="background: var(--card); border: 2px solid var(--border); border-radius: 16px; padding: 25px; margin-bottom: 30px;">
+        <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 20px; color: var(--primary);">
+            <span data-ar="📱 معلومات الدفع" data-en="📱 Payment Information">📱 Payment Information</span>
+        </h2>
+        
+        <div style="background: rgba(255, 165, 2, 0.1); border: 1px solid rgba(255, 165, 2, 0.3); border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+            <h3 style="font-size: 16px; font-weight: 800; margin-bottom: 15px;">
+                <span data-ar="💰 أرقام الدفع" data-en="💰 Payment Numbers">💰 Payment Numbers</span>
+            </h3>
+            <div style="display: grid; gap: 10px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--dark); border-radius: 8px;">
+                    <span style="font-weight: 700;">📱 Vodafone Cash:</span>
+                    <span style="color: var(--primary); font-weight: 800; font-size: 18px;">{{ payment_numbers.vodafone }}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--dark); border-radius: 8px;">
+                    <span style="font-weight: 700;">💳 InstaPay:</span>
+                    <span style="color: var(--primary); font-weight: 800; font-size: 18px;">{{ payment_numbers.instapay }}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--dark); border-radius: 8px;">
+                    <span style="font-weight: 700;">💰 Binance Pay:</span>
+                    <span style="color: var(--primary); font-weight: 800; font-size: 18px;">{{ payment_numbers.binance }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: rgba(52, 152, 219, 0.1); border: 1px solid rgba(52, 152, 219, 0.3); border-radius: 10px; padding: 15px;">
+            <p style="margin: 0; color: var(--text-gray); font-size: 14px; line-height: 1.6;">
+                <span data-ar="💡 قم بتحويل المبلغ الكلي ({{ total }} ج) إلى أحد الأرقام أعلاه، ثم املأ النموذج أدناه" data-en="💡 Transfer the total amount ({{ total }} EGP) to one of the numbers above, then fill the form below">
+                    💡 Transfer the total amount ({{ total }} EGP) to one of the numbers above, then fill the form below
+                </span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Order Form -->
+    <div style="background: var(--card); border: 2px solid var(--border); border-radius: 16px; padding: 25px;">
+        <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 20px; color: var(--primary);">
+            <span data-ar="📝 بيانات الطلب" data-en="📝 Order Details">📝 Order Details</span>
+        </h2>
+        
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div style="margin-bottom: 20px;">
+                <label style="font-weight: 700; margin-bottom: 8px; display: block; font-size: 14px;">
+                    <span data-ar="💵 طريقة الدفع" data-en="💵 Payment Method">💵 Payment Method</span>
+                </label>
+                <select name="payment_method" required style="width: 100%; padding: 14px; background: var(--dark); border: 2px solid var(--border); color: var(--text); border-radius: 10px; font-size: 14px; font-weight: 600;">
+                    <option value="vodafone">📱 Vodafone Cash</option>
+                    <option value="instapay">💳 InstaPay</option>
+                    <option value="binance">💰 Binance Pay</option>
+                </select>
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <label style="font-weight: 700; margin-bottom: 8px; display: block; font-size: 14px;">
+                    <span data-ar="👤 اسم المستخدم في Discord" data-en="👤 Discord Username">👤 Discord Username</span>
+                </label>
+                <input type="text" name="discord_username" required placeholder="username#1234" style="width: 100%; padding: 14px; background: var(--dark); border: 2px solid var(--border); color: var(--text); border-radius: 10px; font-size: 14px; font-weight: 600;">
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <label style="font-weight: 700; margin-bottom: 8px; display: block; font-size: 14px;">
+                    <span data-ar="📱 رقم WhatsApp" data-en="📱 WhatsApp Number">📱 WhatsApp Number</span>
+                </label>
+                <input type="text" name="whatsapp" required placeholder="01xxxxxxxxx" style="width: 100%; padding: 14px; background: var(--dark); border: 2px solid var(--border); color: var(--text); border-radius: 10px; font-size: 14px; font-weight: 600;">
+            </div>
+            
+            <div style="margin-bottom: 25px;">
+                <label style="font-weight: 700; margin-bottom: 8px; display: block; font-size: 14px;">
+                    <span data-ar="📸 إثبات الدفع (صورة)" data-en="📸 Payment Proof (Image)">📸 Payment Proof (Image)</span>
+                </label>
+                <input type="file" name="payment_proof" required accept="image/*" style="width: 100%; padding: 14px; background: var(--dark); border: 2px solid var(--border); color: var(--text); border-radius: 10px; font-size: 14px;">
+            </div>
+            
+            <div style="display: flex; gap: 15px;">
+                <button type="submit" class="btn btn-primary" style="flex: 1; font-size: 16px; padding: 16px;">
+                    <span data-ar="✅ إرسال الطلب" data-en="✅ Submit Order">✅ Submit Order</span>
+                </button>
+                <a href="{% url 'cart' %}" class="btn btn-outline" style="flex: 1; font-size: 16px; padding: 16px; text-align: center;">
+                    <span data-ar="← العودة للسلة" data-en="← Back to Cart">← Back to Cart</span>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+/* تحسينات Navbar */
+.navbar {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+    backdrop-filter: blur(20px) !important;
+    border-bottom: 3px solid !important;
+    border-image: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary)) 1 !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 71, 87, 0.2) !important;
+}
+
+.nav-brand h1 {
+    font-size: 30px !important;
+    letter-spacing: 0px !important;
+    text-shadow: 0 0 30px rgba(255, 71, 87, 0.5), 0 0 60px rgba(255, 165, 2, 0.3) !important;
+}
+
+.nav-links a {
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    padding: 12px 22px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease !important;
+}
+
+.nav-links a:hover {
+    background: linear-gradient(135deg, rgba(255, 71, 87, 0.2), rgba(255, 165, 2, 0.2)) !important;
+    border-color: var(--primary) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 5px 20px rgba(255, 71, 87, 0.4) !important;
+}
+
+.dashboard-link {
+    background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
+    border: none !important;
+    box-shadow: 0 5px 25px rgba(255, 71, 87, 0.6) !important;
+}
+
+.dashboard-link:hover {
+    transform: translateY(-3px) scale(1.05) !important;
+    box-shadow: 0 8px 30px rgba(255, 71, 87, 0.8) !important;
+}

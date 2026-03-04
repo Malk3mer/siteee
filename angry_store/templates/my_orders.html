@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container" style="margin-top: 40px;">
+    <div style="display: grid; grid-template-columns: 300px 1fr; gap: 25px;">
+        
+        <!-- Sidebar -->
+        <div style="background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 30px; height: fit-content;">
+            <div style="text-align: center; margin-bottom: 25px;">
+                <div style="width: 100px; height: 100px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 48px;">
+                    👤
+                </div>
+                <h2 style="font-size: 22px; font-weight: 900; margin-bottom: 5px;">{{ user.username }}</h2>
+                <p style="color: var(--text-gray); font-size: 14px;">{{ user.email }}</p>
+            </div>
+            
+            <div style="border-top: 1px solid var(--border); padding-top: 20px;">
+                <a href="{% url 'profile' %}" class="profile-menu-item">
+                    <span>📊</span> <span data-ar="نظرة عامة" data-en="Overview">Overview</span>
+                </a>
+                <a href="{% url 'my_orders' %}" class="profile-menu-item active">
+                    <span>🛒</span> <span data-ar="طلباتي" data-en="My Orders">My Orders</span>
+                </a>
+                <a href="#" class="profile-menu-item">
+                    <span>⚙️</span> <span data-ar="الإعدادات" data-en="Settings">Settings</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div>
+            <h1 style="font-size: 32px; font-weight: 900; margin-bottom: 30px;"><span data-ar="🛒 طلباتي" data-en="🛒 My Orders">🛒 My Orders</span></h1>
+            
+            <!-- Filter -->
+            <div style="display: flex; gap: 10px; margin-bottom: 25px; flex-wrap: wrap;">
+                <a href="?status=all" class="filter-btn {% if not request.GET.status or request.GET.status == 'all' %}active{% endif %}"><span data-ar="الكل" data-en="All">All</span></a>
+                <a href="?status=pending" class="filter-btn {% if request.GET.status == 'pending' %}active{% endif %}"><span data-ar="⏳ جاري الاستلام" data-en="⏳ Pending">Pending</span></a>
+                <a href="?status=received" class="filter-btn {% if request.GET.status == 'received' %}active{% endif %}"><span data-ar="✅ تم الاستلام" data-en="✅ Received">Received</span></a>
+                <a href="?status=processing" class="filter-btn {% if request.GET.status == 'processing' %}active{% endif %}"><span data-ar="⚙️ قيد التنفيذ" data-en="⚙️ Processing">Processing</span></a>
+                <a href="?status=completed" class="filter-btn {% if request.GET.status == 'completed' %}active{% endif %}"><span data-ar="✅ مكتمل" data-en="✅ Completed">Completed</span></a>
+                <a href="?status=rejected" class="filter-btn {% if request.GET.status == 'rejected' %}active{% endif %}"><span data-ar="❌ مرفوض" data-en="❌ Rejected">Rejected</span></a>
+            </div>
+
+            <!-- Orders -->
+            {% if orders %}
+                {% for order in orders %}
+                <div style="background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 25px; margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px;">
+                        <div>
+                            <h3 style="font-size: 14px; color: var(--text-gray); margin-bottom: 5px;"><span data-ar="طلب" data-en="Order">Order</span> #{{ order.id }}</h3>
+                            <p style="font-size: 13px; color: var(--text-gray);">{{ order.created_at|date:"d M Y - H:i" }}</p>
+                        </div>
+                        <span class="status-badge status-{{ order.status }}">
+                            {% if order.status == 'pending' %}<span data-ar="⏳ جاري الاستلام" data-en="⏳ Pending">Pending</span>
+                            {% elif order.status == 'received' %}<span data-ar="✅ تم الاستلام" data-en="✅ Received">Received</span>
+                            {% elif order.status == 'processing' %}<span data-ar="⚙️ قيد التنفيذ" data-en="⚙️ Processing">Processing</span>
+                            {% elif order.status == 'completed' %}<span data-ar="✅ مكتمل" data-en="✅ Completed">Completed</span>
+                            {% else %}<span data-ar="❌ مرفوض" data-en="❌ Rejected">Rejected</span>{% endif %}
+                        </span>
+                    </div>
+                    
+                    <!-- Order Tracking -->
+                    <div style="margin-bottom: 20px; padding: 25px; background: rgba(0,0,0,0.2); border-radius: 12px;">
+                        <h4 style="font-size: 15px; font-weight: 800; margin-bottom: 20px; color: var(--primary);"><span data-ar="📦 تتبع الطلب" data-en="📦 Order Tracking">Order Tracking</span></h4>
+                        <div style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+                            <!-- Progress Line -->
+                            <div style="position: absolute; top: 25px; left: 12%; right: 12%; height: 3px; background: rgba(255,255,255,0.1); z-index: 0;"></div>
+                            
+                            <!-- Step 1: Pending -->
+                            <div style="text-align: center; position: relative; z-index: 1; flex: 1;">
+                                <div style="width: 50px; height: 50px; border-radius: 50%; background: {% if order.status in 'pending,received,processing,completed' %}linear-gradient(135deg, #fbbf24, #f59e0b){% else %}rgba(255,255,255,0.1){% endif %}; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; border: 4px solid var(--dark); font-size: 22px; box-shadow: {% if order.status in 'pending,received,processing,completed' %}0 4px 15px rgba(251, 191, 36, 0.4){% else %}none{% endif %};">
+                                    ⏳
+                                </div>
+                                <p style="font-size: 12px; color: {% if order.status in 'pending,received,processing,completed' %}#fbbf24{% else %}var(--text-gray){% endif %}; font-weight: 700;"><span data-ar="جاري الاستلام" data-en="Pending">Pending</span></p>
+                            </div>
+                            
+                            <!-- Step 2: Received -->
+                            <div style="text-align: center; position: relative; z-index: 1; flex: 1;">
+                                <div style="width: 50px; height: 50px; border-radius: 50%; background: {% if order.status in 'received,processing,completed' %}linear-gradient(135deg, #22c55e, #16a34a){% else %}rgba(255,255,255,0.1){% endif %}; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; border: 4px solid var(--dark); font-size: 22px; box-shadow: {% if order.status in 'received,processing,completed' %}0 4px 15px rgba(34, 197, 94, 0.4){% else %}none{% endif %};">
+                                    ✅
+                                </div>
+                                <p style="font-size: 12px; color: {% if order.status in 'received,processing,completed' %}#22c55e{% else %}var(--text-gray){% endif %}; font-weight: 700;"><span data-ar="تم الاستلام" data-en="Received">Received</span></p>
+                            </div>
+                            
+                            <!-- Step 3: Processing -->
+                            <div style="text-align: center; position: relative; z-index: 1; flex: 1;">
+                                <div style="width: 50px; height: 50px; border-radius: 50%; background: {% if order.status in 'processing,completed' %}linear-gradient(135deg, #3b82f6, #2563eb){% else %}rgba(255,255,255,0.1){% endif %}; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; border: 4px solid var(--dark); font-size: 22px; box-shadow: {% if order.status in 'processing,completed' %}0 4px 15px rgba(59, 130, 246, 0.4){% else %}none{% endif %};">
+                                    ⚙️
+                                </div>
+                                <p style="font-size: 12px; color: {% if order.status in 'processing,completed' %}#3b82f6{% else %}var(--text-gray){% endif %}; font-weight: 700;"><span data-ar="قيد التنفيذ" data-en="Processing">Processing</span></p>
+                            </div>
+                            
+                            <!-- Step 4: Completed or Rejected -->
+                            <div style="text-align: center; position: relative; z-index: 1; flex: 1;">
+                                <div style="width: 50px; height: 50px; border-radius: 50%; background: {% if order.status == 'completed' %}linear-gradient(135deg, #22c55e, #16a34a){% elif order.status == 'rejected' %}linear-gradient(135deg, #ef4444, #dc2626){% else %}rgba(255,255,255,0.1){% endif %}; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; border: 4px solid var(--dark); font-size: 22px; box-shadow: {% if order.status == 'completed' %}0 4px 15px rgba(34, 197, 94, 0.4){% elif order.status == 'rejected' %}0 4px 15px rgba(239, 68, 68, 0.4){% else %}none{% endif %};">
+                                    {% if order.status == 'completed' %}🎉{% elif order.status == 'rejected' %}❌{% else %}🎯{% endif %}
+                                </div>
+                                <p style="font-size: 12px; color: {% if order.status == 'completed' %}#22c55e{% elif order.status == 'rejected' %}#ef4444{% else %}var(--text-gray){% endif %}; font-weight: 700;">
+                                    {% if order.status == 'completed' %}<span data-ar="مكتمل" data-en="Completed">Completed</span>
+                                    {% elif order.status == 'rejected' %}<span data-ar="مرفوض" data-en="Rejected">Rejected</span>
+                                    {% else %}<span data-ar="النهاية" data-en="Final">Final</span>{% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 20px; padding: 20px; background: var(--dark); border-radius: 12px;">
+                        <img src="{{ order.product.get_image_url }}" style="width: 100px; height: 100px; border-radius: 10px; object-fit: cover;">
+                        <div style="flex: 1;">
+                            <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 10px;">{{ order.product.name }}</h2>
+                            <p style="color: var(--text-gray); font-size: 14px; margin-bottom: 15px;">{{ order.product.description|truncatewords:20 }}</p>
+                            <div style="display: flex; gap: 20px; font-size: 13px; color: var(--text-gray);">
+                                <div><strong><span data-ar="الدفع:" data-en="Payment:">Payment:</span></strong> {{ order.get_payment_method_display }}</div>
+                                <div><strong>Discord:</strong> {{ order.discord_username }}</div>
+                                <div><strong>WhatsApp:</strong> {{ order.whatsapp }}</div>
+                            </div>
+                        </div>
+                        <div style="text-align: left;">
+                            <div style="font-size: 28px; font-weight: 900; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                                {{ order.product.price }} <span data-ar="ج" data-en="EGP">EGP</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div style="background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 60px; text-align: center;">
+                    <div style="font-size: 80px; margin-bottom: 20px; opacity: 0.3;">📦</div>
+                    <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 10px;"><span data-ar="لا توجد طلبات" data-en="No Orders">No Orders</span></h3>
+                    <p style="color: var(--text-gray); margin-bottom: 25px;"><span data-ar="ابدأ التسوق الآن واحصل على أفضل العروض!" data-en="Start shopping now and get the best deals!">Start shopping now and get the best deals!</span></p>
+                    <a href="{% url 'home' %}" class="btn btn-primary"><span data-ar="🛒 تسوق الآن" data-en="🛒 Shop Now">🛒 Shop Now</span></a>
+                </div>
+            {% endif %}</div>
+    </div>
+</div>
+
+<style>
+.profile-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    color: var(--text-gray);
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+.profile-menu-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text);
+}
+.profile-menu-item.active {
+    background: linear-gradient(135deg, rgba(255, 71, 87, 0.15), rgba(255, 165, 2, 0.15));
+    color: var(--primary);
+}
+</style>
+{% endblock %}

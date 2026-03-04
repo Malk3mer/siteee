@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}<span data-ar="المفضلة - Angry Store" data-en="Wishlist - Angry Store">Wishlist - Angry Store</span>{% endblock %}
+
+{% block content %}
+<div class="container" style="margin-top: 40px;">
+    <h1 style="font-size: 36px; font-weight: 900; margin-bottom: 30px; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"><span data-ar="❤️ المفضلة" data-en="❤️ Wishlist">❤️ Wishlist</span></h1>
+
+    {% if wishlist_items %}
+    <div class="products-grid">
+        {% for item in wishlist_items %}
+        <div class="product-card">
+            <div class="product-image">
+                <img src="{{ item.product.get_image_url }}" alt="{{ item.product.name }}">
+                <span class="product-badge">{{ item.product.get_product_type_display }}</span>
+                <span class="product-rating">⭐ 4.8</span>
+            </div>
+            <div class="product-info">
+                <div class="product-tags">
+                    {% for tag in item.product.get_tags_list %}
+                    <span class="product-tag">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+                <h3>{{ item.product.name }}</h3>
+                <p class="product-description">{{ item.product.description|truncatewords:15 }}</p>
+                <div class="product-footer">
+                    <div class="product-price-box">
+                        <span class="product-price">{{ item.product.price }} <span data-ar="ج" data-en="EGP">EGP</span></span>
+                    </div>
+                    <div class="product-actions">
+                        <a href="{% url 'product_detail' item.product.pk %}" class="btn-icon">👁️</a>
+                        <a href="{% url 'add_to_cart' item.product.pk %}" class="btn-icon cart-icon">
+                            <svg viewBox="0 0 24 24" stroke-width="2">
+                                <circle cx="9" cy="21" r="1"></circle>
+                                <circle cx="20" cy="21" r="1"></circle>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                            </svg>
+                        </a>
+                        <a href="{% url 'toggle_wishlist' item.product.pk %}" class="btn-icon wishlist-icon" style="color: #ef4444;">❌</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="empty-state-icon">❤️</div>
+        <h3 class="empty-state-title"><span data-ar="المفضلة فارغة" data-en="Wishlist is Empty">Wishlist is Empty</span></h3>
+        <p class="empty-state-text"><span data-ar="لم تقم بإضافة أي منتجات للمفضلة بعد" data-en="You haven't added any products to wishlist yet">You haven't added any products to wishlist yet</span></p>
+        <a href="{% url 'home' %}" class="btn btn-primary"><span data-ar="تصفح المنتجات" data-en="Browse Products">Browse Products</span></a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

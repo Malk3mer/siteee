@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}<span data-ar="نايترو - Angry Store" data-en="Nitro - Angry Store">Nitro - Angry Store</span>{% endblock %}
+
+{% block content %}
+<div class="hero" style="padding: 60px 0; background: linear-gradient(135deg, rgba(88, 101, 242, 0.1), rgba(114, 137, 218, 0.1));">
+    <div class="container">
+        <div class="hero-content" style="text-align: center;">
+            <h1 class="hero-title gradient-text" style="font-size: 48px;"><span data-ar="💎 نايترو" data-en="💎 Nitro">💎 Nitro</span></h1>
+            <p class="hero-subtitle"><span data-ar="اشتراكات Discord Nitro • توصيل فوري • أفضل الأسعار" data-en="Discord Nitro subscriptions • Instant delivery • Best prices">Discord Nitro subscriptions • Instant delivery • Best prices</span></p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="filters">
+        <div class="search-box">
+            <form method="get">
+                <input type="text" name="search" placeholder="🔍 Search for Nitro subscription..." data-ar-placeholder="🔍 ابحث عن اشتراك نايترو..." data-en-placeholder="🔍 Search for Nitro subscription..." value="{{ request.GET.search }}">
+                <button type="submit"><span data-ar="بحث" data-en="Search">Search</span></button>
+            </form>
+        </div>
+    </div>
+
+    <div class="products-grid fade-in">
+        {% for product in products %}
+        <div class="product-card">
+            <div class="product-image">
+                <img src="{{ product.get_image_url }}" alt="{{ product.name }}">
+                <span class="product-badge" style="background: linear-gradient(135deg, #5865F2, #7289DA);"><span data-ar="نايترو" data-en="Nitro">Nitro</span></span>
+                <span class="product-rating">⭐ 4.9</span>
+            </div>
+            <div class="product-info">
+                <div class="product-tags">
+                    {% for tag in product.get_tags_list %}
+                    <span class="product-tag">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+                <h3>{{ product.name }}</h3>
+                <p class="product-description">{{ product.description|truncatewords:15 }}</p>
+                <div class="product-footer">
+                    <div class="product-price-box">
+                        <span class="product-price">{{ product.price }} <span data-ar="ج" data-en="EGP">EGP</span></span>
+                    </div>
+                    <div class="product-actions">
+                        <a href="{% url 'product_detail' product.pk %}" class="btn-icon">👁️</a>
+                        <a href="{% url 'add_to_cart' product.pk %}" class="btn-icon cart-icon">
+                            <svg viewBox="0 0 24 24" stroke-width="2">
+                                <circle cx="9" cy="21" r="1"></circle>
+                                <circle cx="20" cy="21" r="1"></circle>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                            </svg>
+                        </a>
+                        <a href="{% url 'toggle_wishlist' product.pk %}" class="btn-icon wishlist-icon">❤️</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="empty-state">
+            <div class="empty-state-icon">💎</div>
+            <h3 class="empty-state-title"><span data-ar="لا توجد اشتراكات نايترو متاحة حالياً" data-en="No Nitro subscriptions available currently">No Nitro subscriptions available currently</span></h3>
+            <p class="empty-state-text"><span data-ar="تحقق لاحقاً للحصول على عروض جديدة!" data-en="Check back soon for new offers!">Check back soon for new offers!</span></p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

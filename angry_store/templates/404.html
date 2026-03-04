@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+.error-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.error-content {
+    max-width: 600px;
+}
+
+.error-code {
+    font-size: 120px;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.error-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 15px;
+}
+
+.error-message {
+    font-size: 16px;
+    color: var(--text-gray);
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.error-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.error-icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+</style>
+
+<div class="container">
+    <div class="error-page">
+        <div class="error-content fade-in">
+            <div class="error-icon">🎮</div>
+            <div class="error-code">404</div>
+            <h1 class="error-title"><span data-ar="الصفحة غير موجودة" data-en="Page Not Found">Page Not Found</span></h1>
+            <p class="error-message">
+                <span data-ar="عذراً، الصفحة التي تبحث عنها غير موجودة أو تم نقلها" data-en="Sorry, the page you're looking for doesn't exist or has been moved">
+                    Sorry, the page you're looking for doesn't exist or has been moved
+                </span>
+            </p>
+            <div class="error-actions">
+                <a href="{% url 'home' %}" class="btn btn-primary">
+                    <span data-ar="🏠 العودة للرئيسية" data-en="🏠 Back to Home">🏠 Back to Home</span>
+                </a>
+                <a href="{% url 'games_page' %}" class="btn btn-outline">
+                    <span data-ar="🎮 تصفح الألعاب" data-en="🎮 Browse Games">🎮 Browse Games</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <span class="hero-badge"><span data-ar="🔥 عروض حصرية لفترة محدودة" data-en="🔥 Exclusive Limited Time Offers">🔥 Exclusive Limited Time Offers</span></span>
+            <h1 class="hero-title"><span data-ar="اكتشف عالم الألعاب الرقمية" data-en="Discover the World of Digital Games">Discover the World of Digital Games</span></h1>
+            <p class="hero-subtitle"><span data-ar="آلاف الألعاب والاشتراكات الحصرية بأفضل الأسعار • توصيل فوري • دعم 24/7 • ضمان الجودة" data-en="Thousands of games and exclusive subscriptions at the best prices • Instant delivery • 24/7 Support • Quality Guarantee">Thousands of games and exclusive subscriptions at the best prices • Instant delivery • 24/7 Support • Quality Guarantee</span></p>
+            <a href="https://discord.gg/MvBgwsyzKP" target="_blank" class="hero-cta" style="display: inline-flex; align-items: center; gap: 10px;">
+                <svg width="24" height="24" viewBox="0 0 71 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z" fill="white"/>
+                </svg>
+                <span data-ar="انضم لديسكورد" data-en="Join Discord">Join Discord</span>
+            </a>
+            <a href="#products" class="hero-cta" style="display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #2ecc71, #27ae60); margin-right: 15px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                <span data-ar="تسوق الآن" data-en="Shop Now">Shop Now</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="categories">
+        <a href="{% url 'offline_games' %}" class="category-card" style="text-decoration: none; color: inherit; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 8px 24px rgba(255, 71, 87, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+            <div class="category-icon">🎮</div>
+            <h3><span data-ar="ألعاب أوفلاين" data-en="Offline Games">Offline Games</span></h3>
+        </a>
+        <a href="{% url 'online_games' %}" class="category-card" style="text-decoration: none; color: inherit; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 8px 24px rgba(255, 71, 87, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+            <div class="category-icon">🌐</div>
+            <h3><span data-ar="ألعاب أونلاين" data-en="Online Games">Online Games</span></h3>
+        </a>
+        <a href="{% url 'activate_games' %}" class="category-card" style="text-decoration: none; color: inherit; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 8px 24px rgba(255, 71, 87, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+            <div class="category-icon">🔑</div>
+            <h3><span data-ar="مفاتيح التفعيل" data-en="Activation Keys">Activation Keys</span></h3>
+        </a>
+        <a href="{% url 'nitro_page' %}" class="category-card" style="text-decoration: none; color: inherit; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 8px 24px rgba(255, 71, 87, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+            <div class="category-icon">💎</div>
+            <h3><span data-ar="نايترو" data-en="Nitro">Nitro</span></h3>
+        </a>
+        <a href="{% url 'accessories_page' %}" class="category-card" style="text-decoration: none; color: inherit; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 8px 24px rgba(255, 71, 87, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+            <div class="category-icon">🎮</div>
+            <h3><span data-ar="إكسسوارات" data-en="Accessories">Accessories</span></h3>
+        </a>
+    </div>
+</div>
+
+<div class="container" id="products">
+    <div class="filters">
+        <div class="search-box">
+            <form method="get">
+                <input type="text" name="search" placeholder="🔍 Search for your favorite game..." value="{{ request.GET.search }}" data-ar-placeholder="🔍 ابحث عن لعبتك المفضلة..." data-en-placeholder="🔍 Search for your favorite game...">
+                <button type="submit"><span data-ar="بحث" data-en="Search">Search</span></button>
+            </form>
+        </div>
+    </div>
+
+    <div class="products-grid">
+        {% for product in products %}
+        <div class="product-card">
+            <div class="product-image">
+                <img src="{{ product.get_image_url }}" alt="{{ product.name }}">
+                <span class="product-badge">{{ product.get_product_type_display }}</span>
+                {% if product.platform %}
+                <span class="product-badge" style="top: 60px; background: linear-gradient(135deg, rgba(255, 165, 2, 0.9), rgba(255, 140, 0, 0.9));">{{ product.get_platform_display }}</span>
+                {% endif %}
+                <span class="product-rating">⭐ 4.8</span>
+                <div class="product-quick-desc">
+                    💯 جودة عالية • أسعار منافسة • ثقة وأمان
+                </div>
+            </div>
+            <div class="product-info">
+                <div class="product-tags">
+                    {% for tag in product.get_tags_list %}
+                    <span class="product-tag">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+                <h3>{{ product.name }}</h3>
+                <p class="product-description">{{ product.description|truncatewords:15 }}</p>
+                <div class="product-features">
+                    {% if product.get_features_list %}
+                        {% for feature in product.get_features_list %}
+                        <div class="product-feature">
+                            {{ feature }}
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="product-footer">
+                    <div class="product-price-box">
+                        <span class="product-price">{{ product.price }} ج</span>
+                    </div>
+                    <div class="product-actions">
+                        <a href="{% url 'product_detail' product.pk %}" class="btn-icon" title="عرض التفاصيل">👁️</a>
+                        <a href="{% url 'add_to_cart' product.pk %}" class="btn-icon cart-icon" title="إضافة للسلة">
+                            <svg viewBox="0 0 24 24" stroke-width="2">
+                                <circle cx="9" cy="21" r="1"></circle>
+                                <circle cx="20" cy="21" r="1"></circle>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                            </svg>
+                        </a>
+                        <a href="{% url 'toggle_wishlist' product.pk %}" class="btn-icon wishlist-icon" title="إضافة للمفضلة">❤️</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="no-products"><span data-ar="لا توجد منتجات متاحة حالياً" data-en="No products available currently">No products available currently</span></p>
+        {% endfor %}
+    </div>
+
+    <div class="features-section">
+        <h2 style="text-align: center; font-size: 32px; font-weight: 900; margin-bottom: 40px; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"><span data-ar="✨ لماذا تختارنا؟" data-en="✨ Why Choose Us?">✨ Why Choose Us?</span></h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title"><span data-ar="توصيل فوري" data-en="Instant Delivery">Instant Delivery</span></h3>
+                <p class="feature-text"><span data-ar="احصل على منتجك فوراً بعد الدفع مباشرة" data-en="Get your product instantly after payment">Get your product instantly after payment</span></p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3 class="feature-title"><span data-ar="دعم 24/7" data-en="24/7 Support">24/7 Support</span></h3>
+                <p class="feature-text"><span data-ar="فريق دعم متواجد طوال الوقت" data-en="Support team available all the time">Support team available all the time</span></p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3 class="feature-title"><span data-ar="أسعار تنافسية" data-en="Competitive Prices">Competitive Prices</span></h3>
+                <p class="feature-text"><span data-ar="أفضل الأسعار في السوق" data-en="Best prices in the market">Best prices in the market</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="testimonials" data-no-translate>
+        <h2 class="testimonials-title"><span data-ar="👍 آراء عملائنا" data-en="👍 Customer Reviews">👍 Customer Reviews</span></h2>
+        <div class="testimonials-container">
+            <button class="testimonial-nav prev" onclick="prevTestimonial()">❮</button>
+            <div class="testimonials-slider">
+                {% for testimonial in testimonials %}
+                <div class="testimonial-card discord-style {% if forloop.first %}active{% endif %}">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar" style="background: {{ testimonial.avatar_color }};">👤</div>
+                        <div class="testimonial-info">
+                            <h4>{{ testimonial.username }}</h4>
+                            <span class="testimonial-time">{{ testimonial.time_ago }}</span>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"{{ testimonial.text }}"</p>
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="testimonial-nav next" onclick="nextTestimonial()">❯</button>
+        </div>
+    </div>
+    
+    <style>
+    .testimonials { position: relative; margin: 60px 0; }
+    .testimonials-container { position: relative; display: flex; align-items: center; gap: 20px; }
+    .testimonials-slider { flex: 1; overflow: hidden; position: relative; min-height: 200px; }
+    .testimonial-card.discord-style {
+        position: absolute;
+        width: 100%;
+        background: #2f3136;
+        border-radius: 12px;
+        padding: 25px;
+        border: 1px solid #40444b;
+        opacity: 0;
+        transform: translateX(100%);
+        transition: all 0.5s ease;
+    }
+    .testimonial-card.discord-style.active {
+        opacity: 1;
+        transform: translateX(0);
+        position: relative;
+    }
+    .testimonial-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+    .testimonial-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+    }
+    .testimonial-info h4 { margin: 0; font-size: 18px; font-weight: 700; color: #fff; }
+    .testimonial-time { font-size: 12px; color: #b9bbbe; }
+    .testimonial-text {
+        color: #dcddde;
+        line-height: 1.6;
+        margin: 15px 0;
+        font-size: 15px;
+    }
+    .testimonial-rating { font-size: 18px; margin-top: 10px; }
+    .testimonial-nav {
+        background: linear-gradient(135deg, #5865F2, #7289DA);
+        border: none;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        transition: all 0.3s;
+        flex-shrink: 0;
+    }
+    .testimonial-nav:hover { transform: scale(1.1); box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4); }
+    </style>
+    
+    <script>
+    let currentTestimonial = 0;
+    const testimonials = document.querySelectorAll('.testimonial-card.discord-style');
+    
+    function showTestimonial(index) {
+        testimonials.forEach((t, i) => {
+            t.classList.remove('active');
+            if (i === index) t.classList.add('active');
+        });
+    }
+    
+    function nextTestimonial() {
+        currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+        showTestimonial(currentTestimonial);
+    }
+    
+    function prevTestimonial() {
+        currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+        showTestimonial(currentTestimonial);
+    }
+    
+    setInterval(nextTestimonial, 5000);
+    </script>
+</div>
+{% endblock %}
